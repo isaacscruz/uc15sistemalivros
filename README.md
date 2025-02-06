@@ -1,7 +1,7 @@
 # Sistema de Gerenciamento de Livros
 ## Status do Projeto: 🚧 Em Desenvolvimento 🚧
 
-###Tecnologias Aplicadas:
+## Tecnologias Aplicadas:
 **Back-end:** Java (Spring Boot), Spring Data JPA, MySQL (Banco de dados) e REST API
 
 **Front-end:** HTML, CSS (Bootstrap) eJavaScript (jQuery)
@@ -18,7 +18,7 @@ Isaac Cruz - Desenvolvedor Full Stack
 
 O Sistema de Gerenciamento de Livros tem como objetivo facilitar o cadastro, edição, exclusão e visualização de livros e análises. Ele serve como uma ferramenta para organizar informações sobre livros, permitindo que os usuários adicionem análises e notas aos livros cadastrados.
 
-###Funcionalidades do Sistema (Requisitos):
+### Funcionalidades do Sistema (Requisitos):
 
 **1. Cadastro de Livros**
 Requisito: [RF001]
