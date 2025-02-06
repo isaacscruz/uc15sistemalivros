@@ -4,7 +4,7 @@
 ## Tecnologias Aplicadas:
 **Back-end:** Java (Spring Boot), Spring Data JPA, MySQL (Banco de dados) e REST API
 
-**Front-end:** HTML, CSS (Bootstrap) eJavaScript (jQuery)
+**Front-end:** HTML, CSS (Bootstrap) e JavaScript (jQuery)
 
 **Ferramentas:** Maven (Gerenciamento de dependências), Git (Controle de versão) e GitHub (Repositório remoto)
 
