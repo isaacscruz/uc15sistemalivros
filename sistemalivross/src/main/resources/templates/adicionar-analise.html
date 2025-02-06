@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Análise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Adicionar Análise</h1>
+        <form th:action="@{/livros/{id}/analise(id=${livroId})}" method="post">
+            <div class="form-group">
+                <label for="analiseTexto">Análise:</label>
+                <textarea class="form-control" id="analiseTexto" name="analiseTexto" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="nota">Nota:</label>
+                <input type="number" class="form-control" id="nota" name="nota" min="1" max="10" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Análise</button>
+            <a th:href="@{/livros}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Livros</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Gênero</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="livrosTable">
+                <!-- Linhas serão preenchidas via JavaScript -->
+            </tbody>
+        </table>
+        <a href="/livros/cadastrar" class="btn btn-primary">Adicionar Livro</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Requisição GET para listar livros
+            $.ajax({
+                url: "/api/livros",
+                method: "GET",
+                success: function(data) {
+                    let rows = "";
+                    data.forEach(function(livro) {
+                        rows += `
+                            <tr>
+                                <td>${livro.id}</td>
+                                <td>${livro.titulo}</td>
+                                <td>${livro.genero}</td>
+                                <td>
+                                    <a href="/livros/detalhes/${livro.id}" class="btn btn-info btn-sm">Detalhes</a>
+                                    <a href="/livros/editar/${livro.id}" class="btn btn-warning btn-sm">Editar</a>
+                                    <button onclick="excluirLivro(${livro.id})" class="btn btn-danger btn-sm">Excluir</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    $("#livrosTable").html(rows);
+                }
+            });
+        });
+
+        function excluirLivro(id) {
+            if (confirm("Tem certeza que deseja excluir este livro?")) {
+                $.ajax({
+                    url: `/api/livros/${id}`,
+                    method: "DELETE",
+                    success: function() {
+                        alert("Livro excluído com sucesso!");
+                        location.reload(); // Recarrega a página
+                    },
+                    error: function() {
+                        alert("Erro ao excluir o livro.");
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

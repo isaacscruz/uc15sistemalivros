@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Livro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Detalhes do Livro</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${livro.titulo}">Título do Livro</h5>
+                <p class="card-text" th:text="${livro.sinopse}">Sinopse do Livro</p>
+                <p class="card-text"><strong>Gênero:</strong> <span th:text="${livro.genero}">Gênero</span></p>
+                <p class="card-text"><strong>Ano de Lançamento:</strong> <span th:text="${livro.anoLancamento}">Ano</span></p>
+            </div>
+        </div>
+
+        <h2 class="mt-4">Análises</h2>
+        <div id="analises">
+            <!-- Análises serão preenchidas via JavaScript -->
+        </div>
+
+        <a th:href="@{/livros/{id}/analise(id=${livro.id})}" class="btn btn-primary mt-3">Adicionar Análise</a>
+        <a th:href="@{/livros}" class="btn btn-secondary mt-3">Voltar para a Lista de Livros</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const livroId = window.location.pathname.split("/").pop();
+
+            // Requisição GET para buscar análises do livro
+            $.ajax({
+                url: `/api/analises?livroId=${livroId}`,
+                method: "GET",
+                success: function(data) {
+                    let analisesHtml = "";
+                    data.forEach(function(analise) {
+                        analisesHtml += `
+                            <div class="list-group-item">
+                                <p>${analise.texto}</p>
+                                <p><strong>Nota:</strong> ${analise.nota}</p>
+                                <button onclick="excluirAnalise(${analise.id})" class="btn btn-danger btn-sm">Excluir</button>
+                            </div>
+                        `;
+                    });
+                    $("#analises").html(analisesHtml);
+                }
+            });
+        });
+
+        function excluirAnalise(id) {
+            if (confirm("Tem certeza que deseja excluir esta análise?")) {
+                $.ajax({
+                    url: `/api/analises/${id}`,
+                    method: "DELETE",
+                    success: function() {
+                        alert("Análise excluída com sucesso!");
+                        location.reload(); // Recarrega a página
+                    },
+                    error: function() {
+                        alert("Erro ao excluir a análise.");
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

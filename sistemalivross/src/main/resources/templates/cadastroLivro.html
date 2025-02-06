@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar/Editar Livro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 th:text="${livro != null} ? 'Editar Livro' : 'Cadastrar Livro'">Cadastrar Livro</h1>
+        <form id="livroForm">
+            <input type="hidden" id="id" th:if="${livro != null}" th:value="${livro.id}">
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" class="form-control" id="titulo" th:value="${livro != null} ? ${livro.titulo} : ''" required>
+            </div>
+            <div class="form-group">
+                <label for="sinopse">Sinopse:</label>
+                <textarea class="form-control" id="sinopse" th:text="${livro != null} ? ${livro.sinopse} : ''" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="genero">Gênero:</label>
+                <input type="text" class="form-control" id="genero" th:value="${livro != null} ? ${livro.genero} : ''" required>
+            </div>
+            <div class="form-group">
+                <label for="anoLancamento">Ano de Lançamento:</label>
+                <input type="number" class="form-control" id="anoLancamento" th:value="${livro != null} ? ${livro.anoLancamento} : ''" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/livros" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#livroForm").submit(function(event) {
+                event.preventDefault();
+
+                const livro = {
+                    id: $("#id").val(),
+                    titulo: $("#titulo").val(),
+                    sinopse: $("#sinopse").val(),
+                    genero: $("#genero").val(),
+                    anoLancamento: $("#anoLancamento").val()
+                };
+
+                const method = livro.id ? "PUT" : "POST";
+                const url = livro.id ? `/api/livros/${livro.id}` : "/api/livros";
+
+                $.ajax({
+                    url: url,
+                    method: method,
+                    contentType: "application/json",
+                    data: JSON.stringify(livro),
+                    success: function() {
+                        alert("Livro salvo com sucesso!");
+                        window.location.href = "/livros";
+                    },
+                    error: function() {
+                        alert("Erro ao salvar o livro.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
