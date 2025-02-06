@@ -1,4 +1,4 @@
-**# Sistema de Gerenciamento de Livros**
+#** Sistema de Gerenciamento de Livros**
 ## Status do Projeto: 🚧 Em Desenvolvimento 🚧
 
 **###Tecnologias Aplicadas:**
@@ -16,6 +16,7 @@ Isaac Cruz - Desenvolvedor Full Stack
 **### Objetivo do Software:** O Sistema de Gerenciamento de Livros tem como objetivo facilitar o cadastro, edição, exclusão e visualização de livros e análises. Ele serve como uma ferramenta para organizar informações sobre livros, permitindo que os usuários adicionem análises e notas aos livros cadastrados.
 
 **###Funcionalidades do Sistema (Requisitos):**
+
 **1. Cadastro de Livros**
 Requisito: [RF001]
 Descrição: Permite cadastrar um novo livro com as seguintes informações: título, sinopse, gênero e ano de lançamento.
